@@ -21,8 +21,10 @@ CREATE TABLE IF NOT EXISTS `funcionario` (
   `setor` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `pass` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `ad` tinyint(1) NOT NULL DEFAULT 1
+  `ad` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO 'funcionario' ('nome', 'setor', 'user', 'pass', 'ad') VALUES ('admin', 'admin', 'admin', MD5('admin'), '1');
 
 -- --------------------------------------------------------
 
@@ -35,6 +37,8 @@ CREATE TABLE IF NOT EXISTS `modelo` (
   `nome` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO 'modelo' ('nome', 'url') VALUES ('padrao', 'modelo.png');
 
 -- --------------------------------------------------------
 

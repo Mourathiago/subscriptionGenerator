@@ -2,7 +2,7 @@
 require_once('db.class.php');
 class functions extends db
 {
-	public function select($select, $table, $where)
+	public function select($table, $select = '*', $where = '1')
     {
         $sql = "SELECT $select FROM $table WHERE $where";
         $query = db::prepare($sql);
@@ -19,13 +19,13 @@ class functions extends db
         foreach($field as $values){ $sql.="$values,"; }
         $sql=substr_replace($sql,")",-1,1);
         $sql.=" VALUES(";
-        foreach($value as $values){ $sql.="$values,"; }
+        foreach($value as $values){ $sql.='"'.$values.'",'; }
         $sql=substr_replace($sql,")",-1,1);
         $query = db::prepare($sql);
         return $query -> execute();
     }
 
-    public function update($table, $data, $where)
+    public function update($table, $data, $where = '1')
     {
         $field=array_keys($data);
         $value=array_values($data);
@@ -40,7 +40,7 @@ class functions extends db
         return $query -> execute();
     }
 
-    public function delete($table, $where)
+    public function delete($table, $where = '1')
     {
         $sql="DELETE FROM $tabela WHERE $clausula"; 
         $query = db::prepare($sql);
