@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `funcionario` (
   `ad` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO 'funcionario' ('nome', 'setor', 'user', 'pass', 'ad') VALUES ('admin', 'admin', 'admin', MD5('admin'), '1');
+INSERT INTO `funcionario` (`nome`, `setor`, `user`, `pass`, `ad`) VALUES ('admin', 'admin', 'admin', MD5('admin'), '1');
 
 -- --------------------------------------------------------
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `modelo` (
   `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO 'modelo' ('nome', 'url') VALUES ('padrao', 'modelo.png');
+INSERT INTO `modelo` (`nome`, `url`) VALUES ('padrao', 'modelo.png');
 
 -- --------------------------------------------------------
 
@@ -52,6 +52,8 @@ CREATE TABLE IF NOT EXISTS `assinatura` (
   `funcionarioid` int(11) NOT NULL,
   `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `assinatura` (`modeloid`, `funcionarioid`, `url`) VALUES (1, 1, 'modelo-admin.jpg');
 
 -- --------------------------------------------------------
 

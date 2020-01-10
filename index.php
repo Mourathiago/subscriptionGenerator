@@ -16,22 +16,22 @@
     <link rel="stylesheet" href="source/css/all.min.css">
     <link rel="stylesheet" href="source/css/style.css">
 </head>
-<body onload="l();">
+<body onload="b();">
     
     <nav class="navbar navbar-expand-lg navbar-dark black">
         <div class="container">
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" onclick="l();">Inicio</a>
+                        <a class="nav-link" onclick="b();">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" onclick="m();">Modelos</a>
+                        <a class="nav-link" onclick="c();">Modelos</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" onclick="e();">Sair</a>
+                        <a class="nav-link" onclick="d();">Sair</a>
                     </li>
                 </ul>
             </div>

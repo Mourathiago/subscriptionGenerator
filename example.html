@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exemplo de geração</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="source/css/bootstrap-4-3-1.min.css">
+    <link rel="stylesheet" href="source/css/ajax-4-8-0.min.css">
+    <link rel="stylesheet" href="source/css/all.min.css">
+    <link rel="stylesheet" href="source/css/style.css">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark black">
+        <div class="container">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link">Inicio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                        	<div class="col-12">
+                        		<form id="form" class="row">
+                        			<div class="col-12">
+                        				<label>Nome</label>
+                        				<input type="text" name="nome" class="form-control" required autocomplete="off" autofocus>
+                        			</div>
+                        			<div class="col-12">
+                        				<label>Setor</label>
+                        				<input type="text" name="setor" class="form-control" required autocomplete="off">
+                        			</div>
+                        			<div class="col-12 text-right">
+                        				<input type="submit" value="Gerar" class="btn btn-sm btn-success">
+                        			</div>
+                        		</form>
+                        	</div>
+                        	<div class="col-12">
+                        		<div class="row">
+                        			<div class="col-12" id="img"></div>
+                        			<div class="col-12 text-right" id="btn"></div>
+                        		</div>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="source/script/jquery3-4-0.min.js"></script>
+    <script type="text/javascript">
+    	$('#form').submit(function (e)
+    	{
+    		e.preventDefault();
+    		let data = {nome: $('input[name=nome]').val(), setor: $('input[name=setor]').val()}
+
+    		$.ajax(
+    		{
+    			url: 'example.php',
+    			type: 'POST',
+    			data: data,
+    			success: function (data)
+    			{
+    				$('#img').html('<img src="'+data+'">');
+    				$('#btn').html('<button class="btn btn-sm btn-primary" onclick="download('+"'"+data+"'"+')">Download</button>')
+    			}
+    		})
+    	})
+
+    	function download(url)
+    	{
+    		fetch(url)
+			  .then(resp => resp.blob())
+			  .then(blob => {
+			    const url = window.URL.createObjectURL(blob);
+			    const a = document.createElement('a');
+			    a.style.display = 'none';
+			    a.href = url;
+			    a.download = 'assinatura.jpg';
+			    document.body.appendChild(a);
+			    a.click();
+			    window.URL.revokeObjectURL(url);
+			    a.remove();
+			  })
+			  .catch((e) => console.log(e));
+    	}
+    </script>
+</body>
+</html>

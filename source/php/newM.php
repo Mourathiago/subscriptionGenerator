@@ -42,6 +42,10 @@ if($fileError == UPLOAD_ERR_OK)
 			$data['url'] = $arquivo;
 			$db -> insert('assinatura', $data);
 		}
+		echo json_encode(array(
+			'error' => false,
+			'message' => 'Success'
+		));
 	}
 	catch(Exception $e)
 	{

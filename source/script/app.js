@@ -1,145 +1,277 @@
-function l()
+function b()
 {
 	$.ajax(
 	{
 		url: 'source/php/home.php',
-		success: function (data)
+		success: function (a)
 		{
-			if (data != 0 && data != 'null')
+			if (a != 0 && a != 'null')
 			{
-				$('#b').html(data);
+				$('#b').html(a);
 			}
 		}
 	});
 }
 
-function m()
+function c()
 {
 	$.ajax(
 	{
 		url: 'source/php/models.php',
-		success: function (data)
+		success: function (a)
 		{
-			if (data != 0 && data != 'null')
+			if (a != 0 && a != 'null')
 			{
-				$('#b').html(data);
+				$('#b').html(a);
 			}
 		}
 	});
 }
 
-function v(u)
+function d()
 {
-	let h = '', b = '<div class="row"><div class="col-12 text-center"><img src="source/img/'+u+'"></div></div>';
-	c(h, b);
+	$.ajax(
+	{
+		url: 'source/php/exit.php',
+		success: function (a)
+		{
+			window.location.href = 'entrar.php';
+		}
+	});
 }
 
-function d(u)
+function e()
 {
-	fetch('source/img/'+u)
-	  .then(resp => resp.blob())
-	  .then(blob => {
-	    const url = window.URL.createObjectURL(blob);
-	    const a = document.createElement('a');
-	    a.style.display = 'none';
-	    a.href = url;
-	    a.download = 'assinatura.jpg';
-	    document.body.appendChild(a);
-	    a.click();
-	    window.URL.revokeObjectURL(url);
-	    a.remove();
-	  })
-	  .catch((e) => console.log(e));
-}
-
-function f(i)
-{
-	
-}
-
-function s(i)
-{
-	
-}
-
-function a(i)
-{
-	
-}
-
-function n()
-{
-	let h = 'Novo Funcionário', b, result = {};
-	b = '<form id="new" class="row"><div class="col-6"><label>Nome</label><input type="text" class="form-control" name="nome" autocomplete="off" autofocus required></div><div class="col-6"><label>Setor</label><input type="text" class="form-control" name="setor" autocomplete="off" required></div><div class="col-6"><label>Login</label><input type="text" class="form-control" name="login" autocomplete="off" required></div><div class="col-6"><label>Senha</label><input type="password" class="form-control" name="senha" autocomplete="off" required></div><div class="col-12 text-right"><input type="submit" class="btn btn-sm btn-success" value="Criar"></div></form>';
-	c(h, b);
+	let a = 'Novo Funcionário', b, c = {};
+	b = '<form id="new" class="row"><div class="col-6"><label>Nome</label><input type="text" class="form-control" name="nome" autocomplete="off" autofocus required></div><div class="col-6"><label>Setor</label><input type="text" class="form-control" name="setor" autocomplete="off" required></div><div class="col-6"><label>Login</label><input type="text" class="form-control" name="user" autocomplete="off" required></div><div class="col-6"><label>Senha</label><input type="password" class="form-control" name="pass" autocomplete="off" required></div><div class="col-12 text-right"><input type="submit" class="btn btn-sm btn-success" value="Criar"></div></form>';
+	v(a, b);
 	$('#new').submit(function (e)
 	{
 		e.preventDefault();
 
-		let a = $('#new').serializeArray();
+		let d = $('#new').serializeArray();
 
-	    $.each(a, function(i, field){
-			result[field.name] = field.value;
+	    $.each(d, function(i, field){
+			c[field.name] = field.value;
 		});
 
 		$.ajax(
 		{
 			type: 'POST',
-			data: result,
+			data: c,
 			url: 'source/php/newF.php',
-			success: function (data)
+			success: function (e)
 			{
-				console.log(data);
+				console.log(e);
 			}
 		});
 	});
 }
 
-function p()
+function f(a)
 {
-	let h = 'Novo Modelo', b;
+	$.ajax(
+	{
+		url:'source/php/dataA.php',
+		type:'POST',
+		data:{id:a},
+		success:function(b)
+		{
+			v('Assinaturas', b);
+		}
+	});
+}
+
+function g(a)
+{
+	let b = 'Dados do Funcionário';
+	$.ajax(
+	{
+		url: 'source/php/dataF.php',
+		type: 'POST',
+		data: {id: a},
+		success: function (c)
+		{
+			if (c != 0 && c != 'null')
+			{
+				v(b, c);
+			}
+		}
+	});
+}
+
+function h(a)
+{
+	let b = '', c = '<div class="row"><div class="col-12 text-center"><img src="source/img/'+a+'"></div></div>';
+	v(b, c);
+}
+
+function i(a)
+{
+	fetch('source/img/'+a)
+	  .then(resp => resp.blob())
+	  .then(blob => {
+	    const b = window.URL.createObjectURL(blob);
+	    const c = document.createElement('a');
+	    c.style.display = 'none';
+	    c.href = b;
+	    c.download = 'assinatura.jpg';
+	    document.body.appendChild(c);
+	    c.click();
+	    window.URL.revokeObjectURL(b);
+	    c.remove();
+	  })
+	  .catch((e) => console.log(e));
+}
+
+function j()
+{
+	let a = 'Novo Modelo', b;
 	b = '<form id="new" class="row"><div class="col-6"><label>Nome</label><input type="text" class="form-control" name="nome" autocomplete="off" autofocus required></div><div class="col-6"><label>Imagem</label><div class="input-group"><div class="input-group-prepend"><span class="input-group-text">Imagem</span></div><div class="custom-file"><input type="file" class="custom-file-input" id="img" ><label class="custom-file-label" for="img">Escolha uma imagem</label></div></div></div><div class="col-12 text-right"><input type="submit" class="btn btn-sm btn-success" value="Criar"></div></form>';
-	c(h, b);
+	v(a, b);
 	$('#new').submit(function (e)
 	{
 		e.preventDefault();
-		let a = new FormData();
-		a.append('file', $('#img')[0].files[0]);
-		a.append('name', $('input[name=nome]').val());
+		let c = new FormDatv();
+		c.append('file', $('#img')[0].files[0]);
+		c.append('name', $('input[name=nome]').val());
 
 		$.ajax(
 		{
 			url : 'source/php/newM.php',
 	       type : 'POST',
-	       data : a,
+	       data : c,
 	       processData: false,
 	       contentType: false,
-	       success : function(data)
+	       success : function(d)
 	       {
-	           console.log(data);
+	           console.log(d);
 	       }
 		});
 	});
 }
 
-function c(h = '', b = '', f = '')
+function k(a)
 {
-	$('#modalTitle').html(h);
-	$('#modalBody').html(b);
-	$('#modalFooter').html(f);
-	$('#modal').modal('show');
+	let b = 'Modelo';
+	$.ajax(
+	{
+		url: 'source/php/dataM.php',
+		type: 'POST',
+		data: {id: a},
+		success: function (c)
+		{
+			if (c != 0 && c != 'null')
+			{
+				v(b, c);
+			}
+		}
+	});
 }
 
-function e()
+function l(a)
+{
+	let c = {user:$('input[name=user]').val(),pass:$('input[name=pass]').val(),adm:$('input[name=admin]')[0]['checked'],id:a};
+	$.ajax(
+	{
+		url:'source/php/save.php',
+		type:'POST',
+		data:c,
+		success:function(b)
+		{
+			console.log(b);
+		}
+	});
+}
+
+function m(a)
+{
+	console.log(a);
+}
+
+function n(a,b)
+{
+	$('#modalBody').animate(
+	{
+		marginLeft: '300px',
+		opacity: '0'
+	}, function ()
+	{
+		$('#modalBody').html('<div class="row"><div class="col-12"><button class="btn btn-sm btn-secondary" onclick="q('+b+')">Voltar</button></div><div class="col-12"><img src="source/img/modelos/'+a+'"></div></div>')
+	});
+
+	$('#modalBody').animate(
+	{
+		marginLeft: '0',
+		opacity: '1'
+	});
+}
+
+function o(a, b)
+{
+	$('#modalBody').animate(
+	{
+		marginLeft: '300px',
+		opacity: '0'
+	}, function ()
+	{
+		$('#modalBody').html('<div class="row"><div class="col-12"><button class="btn btn-sm btn-secondary" onclick="q('+b+')">Voltar</button></div><div class="col-12"><img src="source/img/assinaturas/'+a+'"></div></div>')
+	});
+
+	$('#modalBody').animate(
+	{
+		marginLeft: '0',
+		opacity: '1'
+	});
+}
+
+function p(a)
 {
 	$.ajax(
 	{
-		url: 'source/php/exit.php',
-		success: function (data)
+		url:'source/php/generator.php',
+		type:'POST',
+		data:a,
+		success:function(b)
 		{
-			window.location.href = 'entrar.php';
+			console.log(b);
 		}
 	});
+}
+
+function q(a)
+{
+	$('#modalBody').animate(
+	{
+		marginLeft: '300px',
+		opacity: '0'
+	}, function ()
+	{
+		$.ajax(
+		{
+			url:'source/php/dataA.php',
+			type:'POST',
+			data:{id:a},
+			success:function(b)
+			{
+				$('#modalBody').html(b);
+			}
+		});
+	});
+
+	$('#modalBody').animate(
+	{
+		marginLeft: '0',
+		opacity: '1'
+	});
+}
+
+function v(a = '', b = '', c = '')
+{
+	$('#modalTitle').html(a);
+	$('#modalBody').html(b);
+	$('#modalFooter').html(c);
+	$('#modal').modal('show');
 }
 
 $('.modal').on('shown.bs.modal', function ()
