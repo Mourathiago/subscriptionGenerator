@@ -59,14 +59,16 @@
     			data: data,
     			success: function (data)
     			{
-    				if (data != 0 && data != 'null')
-    				{
-						window.location.href = 'index.php';    					
-    				}
-    				else
-    				{
-    					alert("Usuário ou senha incorreto!\nPor Favor, tente novamente!");
-    				}
+                    data = JSON.parse(data);
+                    if (data.error)
+                    {
+                        alert("Usuário ou senha incorreto!\nPor Favor, tente novamente!");
+                        console.log(data.message);
+                    }
+                    else
+                    {
+                        window.location.href = 'index.php';
+                    }
     			}
     		});
     	});

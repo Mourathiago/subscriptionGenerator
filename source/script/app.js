@@ -1,4 +1,4 @@
-function b()
+function a()
 {
 	$.ajax(
 	{
@@ -13,7 +13,7 @@ function b()
 	});
 }
 
-function c()
+function b()
 {
 	$.ajax(
 	{
@@ -28,7 +28,7 @@ function c()
 	});
 }
 
-function d()
+function c()
 {
 	$.ajax(
 	{
@@ -40,11 +40,11 @@ function d()
 	});
 }
 
-function e()
+function d()
 {
 	let a = 'Novo Funcionário', b, c = {};
 	b = '<form id="new" class="row"><div class="col-6"><label>Nome</label><input type="text" class="form-control" name="nome" autocomplete="off" autofocus required></div><div class="col-6"><label>Setor</label><input type="text" class="form-control" name="setor" autocomplete="off" required></div><div class="col-6"><label>Login</label><input type="text" class="form-control" name="user" autocomplete="off" required></div><div class="col-6"><label>Senha</label><input type="password" class="form-control" name="pass" autocomplete="off" required></div><div class="col-12 text-right"><input type="submit" class="btn btn-sm btn-success" value="Criar"></div></form>';
-	v(a, b);
+	r(a, b);
 	$('#new').submit(function (e)
 	{
 		e.preventDefault();
@@ -62,9 +62,33 @@ function e()
 			url: 'source/php/newF.php',
 			success: function (e)
 			{
-				console.log(e);
+				e = window["s"](e);
+				if(e.error)
+				{
+					alert('Ocorreu um erro durante o processo.\nContate o suporte técnico');
+					console.log(e.message);
+				}
+				else
+				{
+					window["a"]();
+					r('', '', '', 'hide');
+				}
 			}
 		});
+	});
+}
+
+function e(a)
+{
+	$.ajax(
+	{
+		url:'source/php/dataA.php',
+		type:'POST',
+		data:a,
+		success:function(b)
+		{
+			r('Assinaturas', b);
+		}
 	});
 }
 
@@ -72,43 +96,28 @@ function f(a)
 {
 	$.ajax(
 	{
-		url:'source/php/dataA.php',
+		url:'source/php/dataF.php',
 		type:'POST',
-		data:{id:a},
-		success:function(b)
+		data:a,
+		success: function (b)
 		{
-			v('Assinaturas', b);
+			if (b != 0 && b != 'null')
+			{
+				r('Dados do Funcionário', b);
+			}
 		}
 	});
 }
 
 function g(a)
 {
-	let b = 'Dados do Funcionário';
-	$.ajax(
-	{
-		url: 'source/php/dataF.php',
-		type: 'POST',
-		data: {id: a},
-		success: function (c)
-		{
-			if (c != 0 && c != 'null')
-			{
-				v(b, c);
-			}
-		}
-	});
+	let b = '', c = '<div class="row"><div class="col-12 text-center"><img src="source/img/'+a.a+'"></div></div>';
+	r(b, c);
 }
 
 function h(a)
 {
-	let b = '', c = '<div class="row"><div class="col-12 text-center"><img src="source/img/'+a+'"></div></div>';
-	v(b, c);
-}
-
-function i(a)
-{
-	fetch('source/img/'+a)
+	fetch('source/img/'+a.a)
 	  .then(resp => resp.blob())
 	  .then(blob => {
 	    const b = window.URL.createObjectURL(blob);
@@ -124,54 +133,63 @@ function i(a)
 	  .catch((e) => console.log(e));
 }
 
-function j()
+function i()
 {
 	let a = 'Novo Modelo', b;
 	b = '<form id="new" class="row"><div class="col-6"><label>Nome</label><input type="text" class="form-control" name="nome" autocomplete="off" autofocus required></div><div class="col-6"><label>Imagem</label><div class="input-group"><div class="input-group-prepend"><span class="input-group-text">Imagem</span></div><div class="custom-file"><input type="file" class="custom-file-input" id="img" ><label class="custom-file-label" for="img">Escolha uma imagem</label></div></div></div><div class="col-12 text-right"><input type="submit" class="btn btn-sm btn-success" value="Criar"></div></form>';
-	v(a, b);
+	r(a, b);
 	$('#new').submit(function (e)
 	{
 		e.preventDefault();
-		let c = new FormDatv();
+		let c = new FormData();
 		c.append('file', $('#img')[0].files[0]);
 		c.append('name', $('input[name=nome]').val());
 
 		$.ajax(
 		{
-			url : 'source/php/newM.php',
-	       type : 'POST',
-	       data : c,
+			url:'source/php/newM.php',
+	       type:'POST',
+	       data:c,
 	       processData: false,
 	       contentType: false,
 	       success : function(d)
 	       {
-	           console.log(d);
+	           d = window["s"](d);
+	           if(d.error)
+				{
+					alert('Ocorreu um erro durante o processo.\nContate o suporte técnico');
+					console.log(d.message);
+				}
+				else
+				{
+					window["b"]();
+					r('', '', '', 'hide');
+				}
 	       }
 		});
 	});
 }
 
-function k(a)
+function j(a)
 {
-	let b = 'Modelo';
 	$.ajax(
 	{
-		url: 'source/php/dataM.php',
-		type: 'POST',
-		data: {id: a},
-		success: function (c)
+		url:'source/php/dataM.php',
+		type:'POST',
+		data:a,
+		success: function (b)
 		{
-			if (c != 0 && c != 'null')
+			if (b != 0 && b != 'null')
 			{
-				v(b, c);
+				r('Modelo', b);
 			}
 		}
 	});
 }
 
-function l(a)
+function k(a)
 {
-	let c = {user:$('input[name=user]').val(),pass:$('input[name=pass]').val(),adm:$('input[name=admin]')[0]['checked'],id:a};
+	let c = {user:$('input[name=user]').val(),pass:$('input[name=pass]').val(),adm:$('input[name=admin]')[0]['checked'],a:a};
 	$.ajax(
 	{
 		url:'source/php/save.php',
@@ -179,25 +197,55 @@ function l(a)
 		data:c,
 		success:function(b)
 		{
-			console.log(b);
+			b = window["s"](b);
+			if(b.error)
+			{
+				alert('Ocorreu um erro durante o processo.\nContate o suporte técnico');
+				console.log(b.message);
+			}
+			else
+			{
+				alert('Salvo com sucesso');
+				r('', '', '', 'hide');
+			}
+		}
+	});
+}
+
+function l(a)
+{
+	$.ajax(
+	{
+		url:'source/php/delete.php',
+		type:'POST',
+		data:a,
+		success:function(b)
+		{
+			b = window["s"](b);
+			if(b.error)
+			{
+				alert('Ocorreu um erro durante o processo.\nContate o suporte técnico');
+				console.log(b.message);
+			}
+			else
+			{
+				alert('Deletado com sucesso');
+				window["a"]();
+				r('', '', '', 'hide');
+			}
 		}
 	});
 }
 
 function m(a)
 {
-	console.log(a);
-}
-
-function n(a,b)
-{
 	$('#modalBody').animate(
 	{
 		marginLeft: '300px',
 		opacity: '0'
 	}, function ()
 	{
-		$('#modalBody').html('<div class="row"><div class="col-12"><button class="btn btn-sm btn-secondary" onclick="q('+b+')">Voltar</button></div><div class="col-12"><img src="source/img/modelos/'+a+'"></div></div>')
+		$('#modalBody').html('<div class="row"><div class="col-12"><button class="btn btn-sm btn-secondary" onclick="p({a:'+a.a+'})">Voltar</button></div><div class="col-12"><img src="source/img/modelos/'+a.b+'"></div></div>')
 	});
 
 	$('#modalBody').animate(
@@ -207,7 +255,7 @@ function n(a,b)
 	});
 }
 
-function o(a, b)
+function n(a)
 {
 	$('#modalBody').animate(
 	{
@@ -215,7 +263,7 @@ function o(a, b)
 		opacity: '0'
 	}, function ()
 	{
-		$('#modalBody').html('<div class="row"><div class="col-12"><button class="btn btn-sm btn-secondary" onclick="q('+b+')">Voltar</button></div><div class="col-12"><img src="source/img/assinaturas/'+a+'"></div></div>')
+		$('#modalBody').html('<div class="row"><div class="col-12"><button class="btn btn-sm btn-secondary" onclick="p({a:'+a.a+'})">Voltar</button></div><div class="col-12"><img src="source/img/assinaturas/'+a.b+'"></div></div>')
 	});
 
 	$('#modalBody').animate(
@@ -225,7 +273,7 @@ function o(a, b)
 	});
 }
 
-function p(a)
+function o(a)
 {
 	$.ajax(
 	{
@@ -234,12 +282,21 @@ function p(a)
 		data:a,
 		success:function(b)
 		{
-			console.log(b);
+			b = window["s"](b);
+			if(b.error)
+			{
+				alert('Ocorreu um erro durante o processo.\nContate o suporte técnico');
+				console.log(b.message);
+			}
+			else
+			{
+				f(a.b);
+			}
 		}
 	});
 }
 
-function q(a)
+function p(a)
 {
 	$('#modalBody').animate(
 	{
@@ -251,7 +308,7 @@ function q(a)
 		{
 			url:'source/php/dataA.php',
 			type:'POST',
-			data:{id:a},
+			data:a,
 			success:function(b)
 			{
 				$('#modalBody').html(b);
@@ -266,12 +323,42 @@ function q(a)
 	});
 }
 
-function v(a = '', b = '', c = '')
+function q(a)
+{
+	$.ajax(
+	{
+		url:'source/php/deleteM.php',
+		type:'POST',
+		data:a,
+		success:function(b)
+		{
+			b = window["s"](b);
+			if(b.error)
+			{
+				alert('Ocorreu um erro durante o processo.\nContate o suporte técnico');
+				console.log(b.message);
+			}
+			else
+			{
+				alert('Deletado com sucesso');
+				window["b"]();
+				r('', '', '', 'hide');
+			}
+		}
+	});
+}
+
+function r(a = '', b = '', c = '', d = 'show')
 {
 	$('#modalTitle').html(a);
 	$('#modalBody').html(b);
 	$('#modalFooter').html(c);
-	$('#modal').modal('show');
+	$('#modal').modal(d);
+}
+
+function s(a)
+{
+	return JSON.parse(a);
 }
 
 $('.modal').on('shown.bs.modal', function ()

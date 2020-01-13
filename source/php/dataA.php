@@ -9,9 +9,9 @@
 
 	foreach ($modelos as $modelo)
 	{
-		$data .= '<tr><td>'.$modelo['nome'].'</td><td><button class="btn btn-sm btn-primary" onclick="n('."'".$modelo['url']."'".', '."'".$_POST['id']."'".')">Vizualizar</button></td><td>';
-		$img = $db -> select('assinatura', '*', 'modeloid = '.$modelo['id'].' AND funcionarioid = '.$_POST['id']);
-		$data .= $img ? '<button class="btn btn-sm btn-primary" onclick="o('."'".$img[0]['url']."'".', '."'".$_POST['id']."'".');">Vizualizar</button>' : '<button class="btn btn-sm btn-primary" onclick="p({mid:'.$modelo['id'].', fid:'.$_POST['id'].'});">Gerar</button>' ;
+		$data .= '<tr><td>'.$modelo['nome'].'</td><td><button class="btn btn-sm btn-primary" onclick="m({a: '."'".$_POST['a']."'".', b:'."'".$modelo['url']."'".'})">Vizualizar</button></td><td>';
+		$img = $db -> select('assinatura', '*', 'modeloid = '.$modelo['id'].' AND funcionarioid = '.$_POST['a']);
+		$data .= $img ? '<button class="btn btn-sm btn-primary" onclick="n({a:'."'".$_POST['a']."'".', b:'."'".$img[0]['url']."'".'});">Vizualizar</button>' : '<button class="btn btn-sm btn-primary" onclick="o({a:'.$modelo['id'].', b:'.$_POST['a'].'});">Gerar</button>' ;
 		$data .= '</td></tr>';
 	}
 

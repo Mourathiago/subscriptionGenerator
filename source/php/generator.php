@@ -5,16 +5,16 @@
 	$img = new canvas();
 	$db = new functions();
 
-	$url = $db -> select('modelo', '*', 'id = '.$_POST['mid']);
-	$dados = $db -> select('funcionario', '*', 'id = '.$_POST['fid']);
+	$url = $db -> select('modelo', '*', 'id = '.$_POST['a']);
+	$dados = $db -> select('funcionario', '*', 'id = '.$_POST['b']);
 	$nome = explode(' ', $dados[0]['nome']);
 	$modelo = '../img/modelos/'.$url[0]['url'];
 	$nomeI = count($nome) > 1 ? $nome[0].' '.$nome[count($nome)-1] : $nome[0];
 	$nomeF = count($nome) > 1 ? $nome[0].'_'.$nome[count($nome)-1] : $nome[0];
 	$file =  $url[0]['nome'].'-'.$nomeF.'.jpg';
 	$fileName = '../img/assinaturas/'.$file;
-	$data['modeloid'] = $_POST['mid'];
-	$data['funcionarioid'] = $_POST['fid'];
+	$data['modeloid'] = $_POST['a'];
+	$data['funcionarioid'] = $_POST['b'];
 	$data['url'] = $file;
 
 	try

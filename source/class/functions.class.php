@@ -29,11 +29,8 @@ class functions extends db
     {
         $field=array_keys($data);
         $value=array_values($data);
-        $sql="UPDATE $tabela SET ";
-        for($i=0;$i<count($data);$i++)
-        {
-            $sql.=$arrcampos[$i].'="'.$arrvalores[$i].'",';
-        }
+        $sql="UPDATE $table SET ";
+        for($i=0;$i<count($data);$i++){$sql.=$field[$i].'="'.$value[$i].'",'; }
         $sql=substr_replace($sql," ",-1,1);
         $sql.="WHERE $where";
         $query = db::prepare($sql);
@@ -42,7 +39,7 @@ class functions extends db
 
     public function delete($table, $where = '1')
     {
-        $sql="DELETE FROM $tabela WHERE $clausula"; 
+        $sql="DELETE FROM $table WHERE $where"; 
         $query = db::prepare($sql);
         return $query -> execute();
     }

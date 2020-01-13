@@ -19,7 +19,7 @@
 		{
 			$modelo = '../img/modelos/'.$model['url'];
 			$fileName = $model['nome'].'-'.$nomeF.'.jpg';
-			$file = '../img/assinaturas/'.$file;
+			$file = '../img/assinaturas/'.$fileName;
 			$img->carrega($modelo)
 				->hexa('#2b2b2b')
 				->legenda($nomeI, 14, 15, 50, '', true, '../fonts/RobotoCondensed-Regular.ttf')
@@ -34,11 +34,15 @@
 			$data['url'] = $fileName;
 			$db -> insert('assinatura', $data);
 		}
+		echo json_encode(array(
+			'error' => false,
+			'message' => "Success"
+		));
 	}
 	catch (Exception $e)
 	{
 		echo json_encode(array(
 			'error' => true,
-			'message' => $e
+			'message' => $e -> getMessage()
 		));
 	}
